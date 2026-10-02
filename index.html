@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koinot Bo'ylab Flexbox — Bolalar Uchun Interaktiv Darslik</title>
+  <meta name="description" content="Bolalar (8-14 yosh) uchun CSS Flexbox bo'yicha interaktiv, o'yinlashtirilgan kosmik darslik.">
+  
+  <!-- Google Fonts for Friendly Rounded Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Core Vector Graphics & Sound Synthesizer -->
+  <script src="audio.js"></script>
+  <script src="svgs.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Starfield & Cosmic Nebula Background -->
+  <div class="space-background">
+    <div class="nebula-glow nebula-1"></div>
+    <div class="nebula-glow nebula-2"></div>
+  </div>
+
+  <!-- Confetti Canvas for Victory Effects -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <div class="app-container">
+    <!-- Top HUD / Header -->
+    <header class="top-hud">
+      <div class="hud-left">
+        <a href="#" class="app-logo" id="logoReset">
+          <span class="logo-badge">🪐</span>
+          <div class="logo-text-wrap">
+            <span class="logo-title">FLEXBOX SAFARI</span>
+            <span class="logo-subtitle">Koinot Bo'ylab Darslik</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="hud-center">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="slide-number-pill" id="slideNumberPill">1 / 8</span>
+      </div>
+
+      <div class="hud-right">
+        <div class="score-badge" title="Toplangan Yulduzlar">
+          <span class="score-star-icon">⭐</span>
+          <span id="hudStarCount">0</span>
+        </div>
+        <button class="btn-icon" id="btnAudioToggle" title="Ovozni o'chirish / yoqish">🔊</button>
+        <button class="btn-icon" id="btnFullscreenToggle" title="To'liq ekran">⛶</button>
+      </div>
+    </header>
+
+    <!-- Slide Deck Viewport -->
+    <main class="slide-viewport">
+      <div class="slide-deck">
+
+        <!-- ==========================================
+             SLIDE 1: MUQADDIMA (display: flex)
+             ========================================== -->
+        <section class="slide active" id="slide-1">
+          <div class="slide-top-bar">
+            <div class="slide-title-wrap">
+              <span class="slide-tag">1-Qadam</span>
+              <h2 class="slide-main-title">Sehrli Quti bilan Tanishamiz</h2>
+            </div>
+            <code class="slide-code-badge" id="s1CodeSnippet">display: flex;</code>
+          </div>
+
+          <div class="slide-content-split">
+            <div class="interactive-panel">
+              <div class="kid-explainer-card">
+                <p id="s1Explainer">
+                  <strong>Sehrli kuch yoqildi!</strong> <code>display: flex;</code> qahramonlarni avtomatik ravishda bitta tartibli qatorga teradi.
+                </p>
+              </div>
+
+              <div class="magic-toggle-container">
+                <button class="magic-toggle-btn" id="s1ToggleFlex">
+                  <span>📦 Oddiy Blokga Qaytish</span>
+                </button>
+                <div class="toggle-state-badge" id="s1StateBadge" style="color: #00f0ff;">
+                  ✨ Sehrli Flexbox (Bir Qatorda)
+                </div>
+              </div>
+
+              <div class="kid-explainer-card">
+                <p>
+                  💡 <em>Tugmani bosib ko'ring:</em> Oddiy blokda hamma narsa ustma-ust tushadi, Flexbox esa ularni bir qatorda do'stlashtiradi!
+                </p>
+              </div>
+            </div>
+
+            <div class="visual-stage-wrap">
+              <div class="stage-header-bar">
+                <span class="stage-label-chip">🛸 Koinot Kabinasi</span>
+                <span class="live-css-snippet">.kema { display: flex; }</span>
+              </div>
+              <div class="canvas-flex-container" id="s1Container" style="display: flex;"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             SLIDE 2: YO'NALISH (flex-direction)
+             ========================================== -->
+        <section class="slide" id="slide-2">
+          <div class="slide-top-bar">
+            <div class="slide-title-wrap">
+              <span class="slide-tag">2-Qadam</span>
+              <h2 class="slide-main-title">Qator yoki Ustun? Boshqaruv Ruli</h2>
+            </div>
+            <code class="slide-code-badge" id="s2CodeSnippet">flex-direction: row;</code>
+          </div>
+
+          <div class="slide-content-split">
+            <div class="interactive-panel">
+              <div class="kid-explainer-card">
+                <p>
+                  <strong>Bosh o'q (Main Axis):</strong> Qahramonlar qaysi tomonga qarab tizilishini belgilaydi.
+                </p>
+              </div>
+
+              <div class="control-block">
+                <span class="control-label">Yo'nalishni tanlang:</span>
+                <div class="button-grid">
+                  <button class="btn-chip active" data-s2-dir="row">
+                    <span>➡️ row</span>
+                    <span class="sub-desc">Qator (Chapdan)</span>
+                  </button>
+                  <button class="btn-chip" data-s2-dir="column">
+                    <span>⬇️ column</span>
+                    <span class="sub-desc">Ustun (Tepadan)</span>
+                  </button>
+                  <button class="btn-chip" data-s2-dir="row-reverse">
+                    <span>⬅️ row-reverse</span>
+                    <span class="sub-desc">Teskari qator</span>
+                  </button>
+                  <button class="btn-chip" data-s2-dir="column-reverse">
+                    <span>⬆️ column-rev</span>
+                    <span class="sub-desc">Teskari ustun</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="visual-stage-wrap">
+              <div class="stage-header-bar">
+                <span class="stage-label-chip">🧭 Harakat Yo'nalishi</span>
+                <span class="live-css-snippet">flex-direction: row;</span>
+              </div>
+              <div class="canvas-flex-container" id="s2Container" style="display: flex; flex-direction: row;"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             SLIDE 3: GORIZONTAL TEKISLASH (justify-content)
+             ========================================== -->
+        <section class="slide" id="slide-3">
+          <div class="slide-top-bar">
+            <div class="slide-title-wrap">
+              <span class="slide-tag">3-Qadam</span>
+              <h2 class="slide-main-title">Gorizontal Tekislash va Oraliq</h2>
+            </div>
+            <code class="slide-code-badge" id="s3CodeSnippet">justify-content: center;</code>
+          </div>
+
+          <div class="slide-content-split">
+            <div class="interactive-panel">
+              <div class="kid-explainer-card">
+                <p>
+                  <strong>Bo'sh joyni taqsimlash:</strong> Bosh o'q bo'ylab elementlarni qayerga jamlash yoki oralarini qanday yoyishni boshqaramiz!
+                </p>
+              </div>
+
+              <div class="control-block">
+                <span class="control-label">Joylashuv usulini bosing:</span>
+                <div class="button-grid">
+                  <button class="btn-chip" data-s3-jc="flex-start">
+                    <span>⏮️ flex-start</span>
+                    <span class="sub-desc">Boshiga</span>
+                  </button>
+                  <button class="btn-chip active" data-s3-jc="center">
+                    <span>🎯 center</span>
+                    <span class="sub-desc">Markazga</span>
+                  </button>
+                  <button class="btn-chip" data-s3-jc="flex-end">
+                    <span>⏭️ flex-end</span>
+                    <span class="sub-desc">Oxiriga</span>
+                  </button>
+                  <button class="btn-chip" data-s3-jc="space-between">
+                    <span>↔️ space-between</span>
+                    <span class="sub-desc">Chetlarga</span>
+                  </button>
+                  <button class="btn-chip" data-s3-jc="space-around">
+                    <span>⚖️ space-around</span>
+                    <span class="sub-desc">Atrofida teng</span>
+                  </button>
+                  <button class="btn-chip" data-s3-jc="space-evenly">
+                    <span>✨ space-evenly</span>
+                    <span class="sub-desc">Mutlaqo teng</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="visual-stage-wrap">
+              <div class="stage-header-bar">
+                <span class="stage-label-chip">🧲 Magnit Stansiyalar</span>
+                <span class="live-css-snippet">justify-content: center;</span>
+              </div>
+              <div class="canvas-flex-container" id="s3Container" style="display: flex; justify-content: center;"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             SLIDE 4: VERTIKAL TEKISLASH (align-items)
+             ========================================== -->
+        <section class="slide" id="slide-4">
+          <div class="slide-top-bar">
+            <div class="slide-title-wrap">
+              <span class="slide-tag">4-Qadam</span>
+              <h2 class="slide-main-title">Vertikal Kosmik Lift</h2>
+            </div>
+            <code class="slide-code-badge" id="s4CodeSnippet">align-items: center;</code>
+          </div>
+
+          <div class="slide-content-split">
+            <div class="interactive-panel">
+              <div class="kid-explainer-card">
+                <p>
+                  <strong>Kesishuvchi o'q (Cross Axis):</strong> Balandlik bo'yicha qahramonlarni qaysi qavatga tekislashni tanlang!
+                </p>
+              </div>
+
+              <div class="control-block">
+                <span class="control-label">Balandlik bo'yicha tekislash:</span>
+                <div class="button-grid">
+                  <button class="btn-chip" data-s4-ai="flex-start">
+                    <span>⬆️ flex-start</span>
+                    <span class="sub-desc">Tepaga</span>
+                  </button>
+                  <button class="btn-chip active" data-s4-ai="center">
+                    <span>🎯 center</span>
+                    <span class="sub-desc">O'rtaga</span>
+                  </button>
+                  <button class="btn-chip" data-s4-ai="flex-end">
+                    <span>⬇️ flex-end</span>
+                    <span class="sub-desc">Pastga</span>
+                  </button>
+                  <button class="btn-chip" data-s4-ai="stretch">
+                    <span>↕️ stretch</span>
+                    <span class="sub-desc">Cho'zilish</span>
+                  </button>
+                  <button class="btn-chip" data-s4-ai="baseline">
+                    <span>📏 baseline</span>
+                    <span class="sub-desc">Yozuv chizig'i</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="visual-stage-wrap">
+              <div class="stage-header-bar">
+                <span class="stage-label-chip">⚡ Lazer Skaner Balandligi</span>
+                <span class="live-css-snippet">align-items: center;</span>
+              </div>
+              <div class="canvas-flex-container" id="s4Container" style="display: flex; align-items: center; min-height: 280px;"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             SLIDE 5: ORALIQ MASOFA (gap)
+             ========================================== -->
+        <section class="slide" id="slide-5">
+          <div class="slide-top-bar">
+            <div class="slide-title-wrap">
+              <span class="slide-tag">5-Qadam</span>
+              <h2 class="slide-main-title">Oraliq Masofa va Xavfsizlik Zonasi</h2>
+            </div>
+            <code class="slide-code-badge" id="s5CodeSnippet">gap: 20px;</code>
+          </div>
+
+          <div class="slide-content-split">
+            <div class="interactive-panel">
+              <div class="kid-explainer-card">
+                <p>
+                  <strong>Do'stona masofa:</strong> <code>gap</code> orqali har bir astronavt orasiga aniq piksellarda masofa o'rnatamiz!
+                </p>
+              </div>
+
+              <div class="range-slider-wrap">
+                <div class="slider-val-readout">
+                  <span>Oraliq masofa:</span>
+                  <strong id="s5GapVal">20px</strong>
+                </div>
+                <input type="range" id="s5GapSlider" class="cosmic-range-input" min="0" max="60" value="20">
+              </div>
+
+              <div class="control-block">
+                <span class="control-label">Tezkor o'lchamlar:</span>
+                <div class="button-grid">
+                  <button class="btn-chip" data-s5-preset="0">0px (Yopishgan)</button>
+                  <button class="btn-chip" data-s5-preset="15">15px (Yaqin)</button>
+                  <button class="btn-chip" data-s5-preset="30">30px (Keng)</button>
+                  <button class="btn-chip" data-s5-preset="50">50px (Uzoq)</button>
+                </div>
+              </div>
+
+              <div class="kid-explainer-card">
+                <span id="s5MoodBadge" style="color: #00f0ff; font-weight: 800; font-size: 0.9rem;">
+                  😊 Qulay! Ideal do'stona oraliq.
+                </span>
+              </div>
+            </div>
+
+            <div class="visual-stage-wrap">
+              <div class="stage-header-bar">
+                <span class="stage-label-chip">📐 Dinamik O'lchagich</span>
+                <span class="live-css-snippet">gap: 20px;</span>
+              </div>
+              <div class="canvas-flex-container" id="s5Container" style="display: flex; gap: 20px; justify-content: center; align-items: center;"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             SLIDE 6: QATORGA SIG'MAGANDA (flex-wrap)
+             ========================================== -->
+        <section class="slide" id="slide-6">
+          <div class="slide-top-bar">
+            <div class="slide-title-wrap">
+              <span class="slide-tag">6-Qadam</span>
+              <h2 class="slide-main-title">Qatorga Sig'maganda: Yangi Qavat</h2>
+            </div>
+            <code class="slide-code-badge" id="s6CodeSnippet">flex-wrap: wrap;</code>
+          </div>
+
+          <div class="slide-content-split">
+            <div class="interactive-panel">
+              <div class="kid-explainer-card">
+                <p>
+                  Kemada yo'lovchilar ko'paysa, <code>wrap</code> ularni keyingi qatorga xushmuomalalik bilan tushiradi.
+                </p>
+              </div>
+
+              <div class="control-block">
+                <span class="control-label">Qatorni boshqarish:</span>
+                <div class="button-grid">
+                  <button class="btn-chip" data-s6-wrap="nowrap">
+                    <span>🚫 nowrap</span>
+                    <span class="sub-desc">Siqilib turish</span>
+                  </button>
+                  <button class="btn-chip active" data-s6-wrap="wrap">
+                    <span>↩️ wrap</span>
+                    <span class="sub-desc">Yangi qatorga</span>
+                  </button>
+                  <button class="btn-chip" data-s6-wrap="wrap-reverse">
+                    <span>⤴️ wrap-reverse</span>
+                    <span class="sub-desc">Yuqori qavatga</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="control-block">
+                <span class="control-label">Yo'lovchilar soni:</span>
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                  <button class="btn-chip" id="s6BtnRemove" style="flex: 1;">➖ Kamaytirish</button>
+                  <span id="s6CountLabel" style="font-weight: 800; font-size: 0.9rem; color: #00f0ff;">5 ta Qahramon</span>
+                  <button class="btn-chip" id="s6BtnAdd" style="flex: 1;">➕ Qo'shish</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="visual-stage-wrap">
+              <div class="stage-header-bar">
+                <span class="stage-label-chip">🛸 Ko'p Qavatli Kema</span>
+                <span class="live-css-snippet">flex-wrap: wrap; gap: 15px;</span>
+              </div>
+              <div class="canvas-flex-container" id="s6Container" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
+                <!-- Dynamically rendered via JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             SLIDE 7: GAMIFIED CHALLENGES & PUZZLES
+             ========================================== -->
+        <section class="slide" id="slide-7">
+          <div class="slide-top-bar">
+            <div class="slide-title-wrap">
+              <span class="slide-tag">🎮 7-Qadam</span>
+              <h2 class="slide-main-title">Koinot Sinovlari: Missiyalarni Bajar!</h2>
+            </div>
+            <code class="slide-code-badge">Mini-O'yin</code>
+          </div>
+
+          <div style="padding: 16px 24px; flex: 1; overflow: hidden;" id="challengeContainer">
+            <!-- Mounted dynamically by challenges.js -->
+          </div>
+        </section>
+
+        <!-- ==========================================
+             SLIDE 8: REAL-TIME CSS PLAYGROUND & ROBO-USTOZ
+             ========================================== -->
+        <section class="slide" id="slide-8">
+          <div class="slide-top-bar">
+            <div class="slide-title-wrap">
+              <span class="slide-tag">🧪 8-Qadam</span>
+              <h2 class="slide-main-title">CSS Flexbox Laboratoriyasi va Robo-Ustoz</h2>
+            </div>
+            <code class="slide-code-badge">Jonli Kompilyator</code>
+          </div>
+
+          <div style="padding: 16px 24px; flex: 1; overflow: hidden;" id="playgroundContainer">
+            <!-- Mounted dynamically by playground.js -->
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Bottom HUD Navigation -->
+    <footer class="bottom-hud">
+      <button class="btn-nav" id="btnPrevSlide" disabled>
+        <span>⬅ Orqaga</span>
+      </button>
+
+      <div class="slide-dots-container" id="slideDots">
+        <!-- Generated via app.js -->
+      </div>
+
+      <button class="btn-nav btn-next" id="btnNextSlide">
+        <span>Oldinga ➔</span>
+      </button>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="audio.js"></script>
+  <script src="svgs.js"></script>
+  <script src="challenges.js"></script>
+  <script src="playground.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
